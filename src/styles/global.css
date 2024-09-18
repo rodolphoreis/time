@@ -9,7 +9,15 @@
 }
 
 body {
-  @apply font-sans;
+  @apply bg-gray-900;
+  @apply text-gray-300;
+}
+
+body,
+input,
+textarea,
+button {
+  @apply font-sans font-normal text-base;
 }
 
 code,
