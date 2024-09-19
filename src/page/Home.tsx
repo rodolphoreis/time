@@ -10,14 +10,14 @@ export function Home() {
           </label>
           <input
             type="text"
-            id="task"
-            className="border-b border-gray-500 text-sm sm:text-3xl bg-transparent outline-2 w-auto focus:border-b-2 focus:border-yellow-400 placeholder:text-zinc-500 placeholder:pl-2"
-            placeholder="Nome para tarefa..."
-          />
-
-          <label htmlFor="minutesAmount" className="text-sm sm:text-3xl">
-            Durante
-          </label>
+          <datalist id="task-suggestions" className="w-full">
+            <option value="Estudar NodeJs" />
+            <option value="Estudar React" />
+            <option value="Estudar Flutter" />
+            <option value="Estudar Python" />
+            <option value="Estudar Go" />
+            <option value="Estudar Rust" />
+          </datalist>
           <input
             type="number"
             id="minutesAmount"
