@@ -20,6 +20,25 @@ button {
   @apply font-sans font-normal text-base;
 }
 
+th {
+  @apply bg-zinc-700;
+  @apply text-white;
+  @apply p-3;
+  @apply text-base;
+  @apply text-left;
+}
+tr {
+  @apply bg-zinc-600;
+  @apply border-b border-zinc-700;
+}
+td {
+  @apply bg-zinc-800;
+  @apply text-gray-300;
+  @apply p-3;
+  @apply text-base;
+  @apply text-left;
+}
+
 code,
 pre {
   @apply font-mono;
