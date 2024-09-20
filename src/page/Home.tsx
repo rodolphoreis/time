@@ -1,13 +1,30 @@
 import { MdPlayArrow } from "react-icons/md";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+type InputsTypes = {
+  task: string;
+  duration: number;
+};
 
 export function Home() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InputsTypes>();
+  const onSubmit: SubmitHandler<InputsTypes> = (data) => console.log(data);
+
   return (
     <div className="flex-1 flex-wrap">
-      <form className=" m-1 flex flex-wrap flex-col ">
+      <form
+        className=" m-1 flex flex-wrap flex-col "
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="flex gap-2 ">
           <Input
+            {...register("task")}
             placeholder="Dê o nome para sua tarefa..."
             list="task-suggestions"
             className="bg-transparent outline-2 border-b  border-gray-500 outline-none flex flex-grow"
@@ -22,12 +39,14 @@ export function Home() {
           </datalist>
           <Input
             type="number"
+            {...register("duration", { required: true })}
             step={5}
             min={5}
             max={60}
-            placeholder="Durante..."
+            placeholder="00"
             className="bg-transparent outline-2 border-b border-gray-500 outline-none w-32"
           />
+          {errors.duration && <span>Este campo é obrigatório</span>}
         </div>
 
         <div className="flex justify-center mb-2 gap-2 items-center mt-16">
@@ -47,6 +66,7 @@ export function Home() {
         </div>
         <Button
           variant="outline"
+          type="submit"
           className=" bg-yellow-400 text-xl text-black font-extrabold cursor-pointer outline-none border-none  mt-24 hover:bg-yellow-300 font-mono tracking-wide"
         >
           {" "}
