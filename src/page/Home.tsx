@@ -12,9 +12,13 @@ export function Home() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<InputsTypes>();
   const onSubmit: SubmitHandler<InputsTypes> = (data) => console.log(data);
+
+  const task = watch("task");
+  const timer = watch("duration");
 
   return (
     <div className="flex-1 flex-wrap">
@@ -39,7 +43,7 @@ export function Home() {
           </datalist>
           <Input
             type="number"
-            {...register("duration", { required: true })}
+            {...register("duration", { required: true, valueAsNumber: true })}
             step={5}
             min={5}
             max={60}
@@ -66,6 +70,7 @@ export function Home() {
         </div>
         <Button
           variant="outline"
+          disabled={!task || !timer}
           type="submit"
           className=" bg-yellow-400 text-xl text-black font-extrabold cursor-pointer outline-none border-none  mt-24 hover:bg-yellow-300 font-mono tracking-wide"
         >
