@@ -21,13 +21,13 @@ export function History() {
             <td>Estudar React</td>
             <td>20 min</td>
             <td>12:00</td>
-            <td>Concluído</td>
+            <td>Interrompido</td>
           </tr>
           <tr>
             <td>Estudar Flutter</td>
             <td>10 min</td>
             <td>14:00</td>
-            <td>Pendente</td>
+            <td>Em andamento</td>
           </tr>
         </tbody>
       </table>
