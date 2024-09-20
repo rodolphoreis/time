@@ -15,10 +15,12 @@ export function Home() {
     watch,
     formState: { errors },
   } = useForm<InputsTypes>();
+
   const onSubmit: SubmitHandler<InputsTypes> = (data) => console.log(data);
 
   const task = watch("task");
   const timer = watch("duration");
+  const isSubmitDisabled = !task || !timer;
 
   return (
     <div className="flex-1 flex-wrap">
@@ -70,7 +72,7 @@ export function Home() {
         </div>
         <Button
           variant="outline"
-          disabled={!task || !timer}
+          disabled={isSubmitDisabled}
           type="submit"
           className=" bg-yellow-400 text-xl text-black font-extrabold cursor-pointer outline-none border-none  mt-24 hover:bg-yellow-300 font-mono tracking-wide"
         >
