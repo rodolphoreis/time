@@ -1,7 +1,7 @@
 import { MdPlayArrow } from "react-icons/md";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 
@@ -25,7 +25,7 @@ export function Home() {
     resolver: zodResolver(newCycleFormValidationSchema),
   });
 
-  const onSubmit: SubmitHandler<InputsTypes> = (data) => console.log(data);
+  const onSubmit = (data: InputsTypes) => console.log(data);
 
   const task = watch("task");
   const timer = watch("duration");
