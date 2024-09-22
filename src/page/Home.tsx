@@ -23,6 +23,7 @@ export function Home() {
     formState: { errors },
   } = useForm<InputsTypes>({
     resolver: zodResolver(newCycleFormValidationSchema),
+    defaultValues: { task: "", duration: 0 },
   });
 
   const onSubmit = (data: InputsTypes) => console.log(data);
