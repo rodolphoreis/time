@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
+import { useState } from "react";
 
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, "Informe a tarefa!").max(100),
@@ -12,7 +13,15 @@ const newCycleFormValidationSchema = zod.object({
 
 type InputsTypes = zod.infer<typeof newCycleFormValidationSchema>;
 
+interface Cycle {
+  id: string;
+  task: string;
+  duration: number;
+}
+
 export function Home() {
+  const [cycles, setCycles] = useState<Cycle[]>([]);
+  const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -25,9 +34,20 @@ export function Home() {
   });
 
   const handleCreateNewCicle = (data: InputsTypes) => {
-    console.log(data);
+    const id = String(new Date().getTime());
+
+    const newCicle: Cycle = {
+      id,
+      task: data.task,
+      duration: data.duration,
+    };
+    setCycles((state) => [...state, newCicle]);
+    setActiveCycleId(id);
     reset();
   };
+
+  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
+  console.log(activeCycle);
 
   const task = watch("task");
   const timer = watch("duration");
