@@ -2,11 +2,18 @@ import { MdPlayArrow } from "react-icons/md";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as zod from "zod";
 
 type InputsTypes = {
   task: string;
   duration: number;
 };
+
+const newCycleFormValidationSchema = zod.object({
+  task: zod.string().min(1, "Informe a tarefa!").max(100),
+  duration: zod.number().min(5).max(60),
+});
 
 export function Home() {
   const {
@@ -14,7 +21,9 @@ export function Home() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<InputsTypes>();
+  } = useForm<InputsTypes>({
+    resolver: zodResolver(newCycleFormValidationSchema),
+  });
 
   const onSubmit: SubmitHandler<InputsTypes> = (data) => console.log(data);
 
