@@ -5,15 +5,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 
-type InputsTypes = {
-  task: string;
-  duration: number;
-};
-
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, "Informe a tarefa!").max(100),
   duration: zod.number().min(5).max(60),
 });
+
+type InputsTypes = zod.infer<typeof newCycleFormValidationSchema>;
 
 export function Home() {
   const {
