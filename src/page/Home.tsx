@@ -24,7 +24,7 @@ export function Home() {
     defaultValues: { task: "", duration: 0 },
   });
 
-  const onSubmit = (data: InputsTypes) => {
+  const handleCreateNewCicle = (data: InputsTypes) => {
     console.log(data);
     reset();
   };
@@ -37,7 +37,7 @@ export function Home() {
     <div className="flex-1 flex-wrap">
       <form
         className=" m-1 flex flex-wrap flex-col "
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(handleCreateNewCicle)}
       >
         <div className="flex gap-2 ">
           <Input
