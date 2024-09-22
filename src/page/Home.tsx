@@ -17,13 +17,17 @@ export function Home() {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<InputsTypes>({
     resolver: zodResolver(newCycleFormValidationSchema),
     defaultValues: { task: "", duration: 0 },
   });
 
-  const onSubmit = (data: InputsTypes) => console.log(data);
+  const onSubmit = (data: InputsTypes) => {
+    console.log(data);
+    reset();
+  };
 
   const task = watch("task");
   const timer = watch("duration");
