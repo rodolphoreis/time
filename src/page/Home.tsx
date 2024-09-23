@@ -33,6 +33,29 @@ export function Home() {
     resolver: zodResolver(newCycleFormValidationSchema),
     defaultValues: { task: "", duration: 0 },
   });
+  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
+
+  useEffect(() => {
+    if (activeCycle) {
+      const interval = setInterval(() => {
+        const totalSeconds = activeCycle.duration * 60;
+        const currentSeconds = totalSeconds - amountSecondsPassed;
+
+        if (currentSeconds <= 0) {
+          clearInterval(interval);
+          setAmountSecondsPassed(totalSeconds);
+          setActiveCycleId(null);
+          return;
+        }
+
+        setAmountSecondsPassed(
+          differenceInSeconds(new Date(), activeCycle.startDate)
+        );
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [activeCycle, amountSecondsPassed]);
 
   const handleCreateNewCicle = (data: InputsTypes) => {
     const id = String(new Date().getTime());
