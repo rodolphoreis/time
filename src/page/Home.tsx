@@ -48,7 +48,14 @@ export function Home() {
   };
 
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
-  console.log(activeCycle);
+
+  const totalSeconds = activeCycle ? activeCycle.duration * 60 : 0;
+  const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
+  const minutesAmount = Math.floor(currentSeconds / 60);
+  const secondsAmount = currentSeconds % 60;
+
+  const minutes = String(minutesAmount).padStart(2, "0");
+  const seconds = String(secondsAmount).padStart(2, "0");
 
   const task = watch("task");
   const timer = watch("duration");
@@ -89,17 +96,17 @@ export function Home() {
 
         <div className="flex justify-center mb-2 gap-2 items-center mt-16">
           <span className="bg-zinc-600 p-3 text-6xl sm:p-6 sm:text-8xl  rounded-xl font-mono">
-            0
+            {minutes[0]}
           </span>
           <span className="bg-zinc-600 p-3 text-6xl sm:p-6 sm:text-8xl  rounded-xl font-mono">
-            0
+            {minutes[1]}
           </span>
           <span className="text-8xl text-yellow-400 font-extrabold">:</span>
           <span className="bg-zinc-600 p-3 text-6xl sm:p-6 sm:text-8xl  rounded-xl font-mono">
-            0
+            {seconds[0]}
           </span>
           <span className="bg-zinc-600 p-3 text-6xl sm:p-6 sm:text-8xl  rounded-xl font-mono">
-            0
+            {seconds[1]}
           </span>
         </div>
         <Button
