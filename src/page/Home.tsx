@@ -19,6 +19,7 @@ interface Cycle {
   task: string;
   duration: number;
   startDate: Date;
+  interruptedDate?: Date;
 }
 
 export function Home() {
@@ -92,11 +93,19 @@ export function Home() {
   const timer = watch("duration");
   const isSubmitDisabled = !task || !timer;
 
-  function handleSptopCountdownButtonClick() {
-    if (activeCycle) {
-      setAmountSecondsPassed(totalSeconds);
-    }
+  function handleInterruptCycle() {
+    setCycles(
+      cycles.map((cycle) => {
+        if (cycle.id === activeCycleId) {
+          return { ...cycle, interruptedDate: new Date() };
+        } else {
+          return cycle;
+        }
+      })
+    );
+    setActiveCycleId(null);
   }
+  console.log(cycles);
 
   return (
     <div className="flex-1 flex-wrap">
@@ -149,7 +158,7 @@ export function Home() {
         {activeCycle ? (
           <Button
             variant="outline"
-            onClick={handleSptopCountdownButtonClick}
+            onClick={handleInterruptCycle}
             type="button"
             className=" bg-red-700 text-xl text-white font-extrabold cursor-pointer outline-none border-none  mt-24 hover:bg-red-500 hover:text-white font-mono tracking-wide"
           >
