@@ -1,14 +1,15 @@
-import { MdPlayArrow } from "react-icons/md";
+import { MdPause, MdPlayArrow } from "react-icons/md";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { differenceInSeconds } from "date-fns";
 
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, "Informe a tarefa!").max(100),
-  duration: zod.number().min(5).max(60),
+  duration: zod.number().min(2).max(60),
 });
 
 type InputsTypes = zod.infer<typeof newCycleFormValidationSchema>;
@@ -17,6 +18,7 @@ interface Cycle {
   id: string;
   task: string;
   duration: number;
+  startDate: Date;
 }
 
 export function Home() {
@@ -64,13 +66,13 @@ export function Home() {
       id,
       task: data.task,
       duration: data.duration,
+      startDate: new Date(),
     };
     setCycles((state) => [...state, newCicle]);
     setActiveCycleId(id);
+    setAmountSecondsPassed(0);
     reset();
   };
-
-  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
 
   const totalSeconds = activeCycle ? activeCycle.duration * 60 : 0;
   const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
@@ -89,6 +91,7 @@ export function Home() {
   const task = watch("task");
   const timer = watch("duration");
   const isSubmitDisabled = !task || !timer;
+
   function handleSptopCountdownButtonClick() {
     if (activeCycle) {
       setAmountSecondsPassed(totalSeconds);
@@ -120,7 +123,7 @@ export function Home() {
             type="number"
             {...register("duration", { required: true, valueAsNumber: true })}
             step={5}
-            min={5}
+            min={2}
             max={60}
             placeholder="00"
             className="bg-transparent outline-2 border-b border-gray-500 outline-none w-32"
