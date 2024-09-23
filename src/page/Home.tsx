@@ -89,6 +89,11 @@ export function Home() {
   const task = watch("task");
   const timer = watch("duration");
   const isSubmitDisabled = !task || !timer;
+  function handleSptopCountdownButtonClick() {
+    if (activeCycle) {
+      setAmountSecondsPassed(totalSeconds);
+    }
+  }
 
   return (
     <div className="flex-1 flex-wrap">
@@ -138,15 +143,29 @@ export function Home() {
             {seconds[1]}
           </span>
         </div>
-        <Button
-          variant="outline"
-          disabled={isSubmitDisabled}
-          type="submit"
-          className=" bg-yellow-400 text-xl text-black font-extrabold cursor-pointer outline-none border-none  mt-24 hover:bg-yellow-300 font-mono tracking-wide"
-        >
-          {" "}
-          <MdPlayArrow size={30} /> Começar
-        </Button>
+        {activeCycle ? (
+          <Button
+            variant="outline"
+            onClick={handleSptopCountdownButtonClick}
+            type="button"
+            className=" bg-red-700 text-xl text-white font-extrabold cursor-pointer outline-none border-none  mt-24 hover:bg-red-500 hover:text-white font-mono tracking-wide"
+          >
+            {" "}
+            <MdPause size={30} />
+            Interromper
+          </Button>
+        ) : (
+          <Button
+            variant="outline"
+            disabled={isSubmitDisabled}
+            type="submit"
+            className=" bg-yellow-400 text-xl text-black font-extrabold cursor-pointer outline-none border-none  mt-24 hover:bg-yellow-300 font-mono tracking-wide"
+          >
+            {" "}
+            <MdPlayArrow size={30} />
+            Começar
+          </Button>
+        )}
       </form>
     </div>
   );
