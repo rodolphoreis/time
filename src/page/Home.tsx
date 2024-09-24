@@ -94,8 +94,8 @@ export function Home() {
   const isSubmitDisabled = !task || !timer;
 
   function handleInterruptCycle() {
-    setCycles(
-      cycles.map((cycle) => {
+    setCycles((state) =>
+      state.map((cycle) => {
         if (cycle.id === activeCycleId) {
           return { ...cycle, interruptedDate: new Date() };
         } else {
@@ -105,7 +105,6 @@ export function Home() {
     );
     setActiveCycleId(null);
   }
-  console.log(cycles);
 
   return (
     <div className="flex-1 flex-wrap">
