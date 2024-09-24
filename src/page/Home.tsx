@@ -9,7 +9,7 @@ import { differenceInSeconds } from "date-fns";
 
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, "Informe a tarefa!").max(100),
-  duration: zod.number().min(2).max(60),
+  duration: zod.number().min(1).max(60),
 });
 
 type InputsTypes = zod.infer<typeof newCycleFormValidationSchema>;
@@ -20,7 +20,6 @@ interface Cycle {
   duration: number;
   startDate: Date;
   interruptedDate?: Date;
-  finishedDate?: Date;
 }
 
 export function Home() {
@@ -44,6 +43,9 @@ export function Home() {
   const secondsAmount = currentSeconds % 60;
 
   useEffect(() => {
+    if (!activeCycle) return;
+    const totalSeconds = activeCycle.duration * 60;
+
     if (activeCycle) {
       const interval = setInterval(() => {
         const secondsDifference = differenceInSeconds(
@@ -51,16 +53,13 @@ export function Home() {
           activeCycle.startDate
         );
 
-        if (secondsDifference >= totalSeconds) {
-          setCycles((state) =>
-            state.map((cycle) => {
-              if (cycle.id === activeCycleId) {
-                return { ...cycle, finishedDate: new Date() };
-              } else {
-                return cycle;
-              }
-            })
-          );
+        const currentSeconds = totalSeconds - amountSecondsPassed;
+
+        if (currentSeconds <= 0) {
+          clearInterval(interval);
+          setActiveCycleId(null);
+          setAmountSecondsPassed(totalSeconds);
+          return;
         } else {
           setAmountSecondsPassed(secondsDifference);
         }
@@ -136,7 +135,7 @@ export function Home() {
             type="number"
             {...register("duration", { required: true, valueAsNumber: true })}
             step={5}
-            min={2}
+            min={1}
             max={60}
             placeholder="00"
             className="bg-transparent outline-2 border-b border-gray-500 outline-none w-32"
