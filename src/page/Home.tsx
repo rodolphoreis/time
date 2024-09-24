@@ -20,6 +20,7 @@ interface Cycle {
   duration: number;
   startDate: Date;
   interruptedDate?: Date;
+  finishedDate?: Date;
 }
 
 export function Home() {
@@ -37,28 +38,37 @@ export function Home() {
     defaultValues: { task: "", duration: 0 },
   });
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
+  const totalSeconds = activeCycle ? activeCycle.duration * 60 : 0;
+  const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
+  const minutesAmount = Math.floor(currentSeconds / 60);
+  const secondsAmount = currentSeconds % 60;
 
   useEffect(() => {
     if (activeCycle) {
       const interval = setInterval(() => {
-        const totalSeconds = activeCycle.duration * 60;
-        const currentSeconds = totalSeconds - amountSecondsPassed;
-
-        if (currentSeconds <= 0) {
-          clearInterval(interval);
-          setAmountSecondsPassed(totalSeconds);
-          setActiveCycleId(null);
-          return;
-        }
-
-        setAmountSecondsPassed(
-          differenceInSeconds(new Date(), activeCycle.startDate)
+        const secondsDifference = differenceInSeconds(
+          new Date(),
+          activeCycle.startDate
         );
+
+        if (secondsDifference >= totalSeconds) {
+          setCycles((state) =>
+            state.map((cycle) => {
+              if (cycle.id === activeCycleId) {
+                return { ...cycle, finishedDate: new Date() };
+              } else {
+                return cycle;
+              }
+            })
+          );
+        } else {
+          setAmountSecondsPassed(secondsDifference);
+        }
       }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [activeCycle, amountSecondsPassed]);
+  }, [activeCycle, amountSecondsPassed, activeCycleId, totalSeconds]);
 
   const handleCreateNewCicle = (data: InputsTypes) => {
     const id = String(new Date().getTime());
@@ -74,11 +84,6 @@ export function Home() {
     setAmountSecondsPassed(0);
     reset();
   };
-
-  const totalSeconds = activeCycle ? activeCycle.duration * 60 : 0;
-  const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
-  const minutesAmount = Math.floor(currentSeconds / 60);
-  const secondsAmount = currentSeconds % 60;
 
   const minutes = String(minutesAmount).padStart(2, "0");
   const seconds = String(secondsAmount).padStart(2, "0");
