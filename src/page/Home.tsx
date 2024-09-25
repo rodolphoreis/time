@@ -22,7 +22,11 @@ interface Cycle {
   interruptedDate?: Date;
 }
 
-const CyclesContext = createContext({});
+interface CycleContextType {
+  activeCycle: Cycle | undefined;
+}
+
+const CyclesContext = createContext({} as CycleContextType);
 
 export function Home() {
   const [cycles, setCycles] = useState<Cycle[]>([]);
@@ -113,7 +117,7 @@ export function Home() {
   }
 
   return (
-    <CyclesContext.Provider value={{ cycles, activeCycleId }}>
+    <CyclesContext.Provider value={{ activeCycle }}>
       <div className="flex-1 flex-wrap">
         <form
           className=" m-1 flex flex-wrap flex-col "
