@@ -26,7 +26,7 @@ interface CycleContextType {
   activeCycle: Cycle | undefined;
 }
 
-const CyclesContext = createContext({} as CycleContextType);
+export const CyclesContext = createContext({} as CycleContextType);
 
 export function Home() {
   const [cycles, setCycles] = useState<Cycle[]>([]);
