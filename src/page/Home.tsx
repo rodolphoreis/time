@@ -22,6 +22,8 @@ interface Cycle {
   interruptedDate?: Date;
 }
 
+const CyclesContext = createContext({});
+
 export function Home() {
   const [cycles, setCycles] = useState<Cycle[]>([]);
   const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
