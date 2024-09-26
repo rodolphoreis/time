@@ -27,6 +27,11 @@ export function History() {
                 </td>
               </tr>
             ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>Nenhum ciclo foi registrado ainda.</p>
+      )}
     </div>
   );
 }
