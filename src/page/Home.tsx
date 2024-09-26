@@ -14,7 +14,7 @@ const newCycleFormValidationSchema = zod.object({
 
 type InputsTypes = zod.infer<typeof newCycleFormValidationSchema>;
 
-interface Cycle {
+export interface Cycle {
   id: string;
   task: string;
   duration: number;
