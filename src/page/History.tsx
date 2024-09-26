@@ -6,36 +6,27 @@ export function History() {
 
   return (
     <div className="flex-1 overflow-auto mt-2">
-      <table className="w-full border-collapse min-w-96">
-        <thead>
-          <tr>
-            <th className="rounded-tl-md pl-3">Tarefa</th>
-            <th>Duração</th>
-            <th>Inicio</th>
-            <th className="rounded-tr-md">status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="w-1/2">Estudar NodeJs</td>
-            <td>15 min</td>
-            <td>10:00</td>
-            <td>Concluído</td>
-          </tr>
-          <tr>
-            <td>Estudar React</td>
-            <td>20 min</td>
-            <td>12:00</td>
-            <td>Interrompido</td>
-          </tr>
-          <tr>
-            <td>Estudar Flutter</td>
-            <td>10 min</td>
-            <td>14:00</td>
-            <td>Em andamento</td>
-          </tr>
-        </tbody>
-      </table>
+      {cycles && cycles.length > 0 ? (
+        <table className="w-full border-collapse min-w-96">
+          <thead>
+            <tr>
+              <th className="rounded-tl-md pl-3">Tarefa</th>
+              <th>Duração</th>
+              <th>Início</th>
+              <th className="rounded-tr-md">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cycles.map((cycle: Cycle) => (
+              <tr key={cycle.id}>
+                <td className="w-1/2">{cycle.task}</td>
+                <td>{cycle.duration} min</td>
+                <td>{cycle.startDate.toLocaleString()}</td>
+                <td>
+                  {cycle.interruptedDate ? "Interrompido" : "Em andamento"}
+                </td>
+              </tr>
+            ))}
     </div>
   );
 }
