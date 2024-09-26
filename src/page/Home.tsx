@@ -24,6 +24,8 @@ interface Cycle {
 
 interface CycleContextType {
   activeCycle: Cycle | undefined;
+  activeCycleId: string | null;
+  cycles: Cycle[] | undefined;
 }
 
 export const CyclesContext = createContext({} as CycleContextType);
