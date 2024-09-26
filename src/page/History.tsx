@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { Cycle, CyclesContext } from "./Home";
+
 export function History() {
   return (
     <div className="flex-1 overflow-auto mt-2">
