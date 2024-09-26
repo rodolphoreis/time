@@ -119,7 +119,7 @@ export function Home() {
   }
 
   return (
-    <CyclesContext.Provider value={{ activeCycle }}>
+    <CyclesContext.Provider value={{ activeCycle, activeCycleId, cycles }}>
       <div className="flex-1 flex-wrap">
         <form
           className=" m-1 flex flex-wrap flex-col "
