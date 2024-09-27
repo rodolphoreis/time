@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Cycle, CyclesContext } from "./Home";
 
 export function History() {
-  const { cycles, activeCycle, activeCycleId } = useContext(CyclesContext);
+  const { cycles } = useContext(CyclesContext);
 
   return (
     <div className="flex-1 overflow-auto mt-2">
