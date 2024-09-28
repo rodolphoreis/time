@@ -1,5 +1,4 @@
 import { useContext } from "react";
-
 import { Cycle, CyclesContext } from "@/context/CycleContextProvider";
 
 export function History() {
@@ -22,9 +21,14 @@ export function History() {
               <tr key={cycle.id}>
                 <td className="w-1/2">{cycle.task}</td>
                 <td>{cycle.duration} min</td>
-                <td>{cycle.startDate.toLocaleString()}</td>
-                <td>
-                  {cycle.interruptedDate ? "Interrompido" : "Em andamento"}
+                <td>{new Date(cycle.startDate).toLocaleDateString("pt-BR")}</td>
+                <td className="flex items-center gap-2">
+                  {cycle.interruptedDate ? (
+                    <div className="rounded-full bg-red-600 w-2 h-2"></div>
+                  ) : (
+                    <div className="rounded-full bg-green-600 w-2 h-2"></div>
+                  )}
+                  {cycle.interruptedDate ? "Interrompido" : "Concluido"}
                 </td>
               </tr>
             ))}
