@@ -17,7 +17,6 @@ type InputsTypes = zod.infer<typeof newCycleFormValidationSchema>;
 
 export function Home() {
   const { cycles, setCycles } = useContext(CyclesContext);
-  console.log("Cycles: ", cycles);
 
   const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
@@ -104,10 +103,6 @@ export function Home() {
     );
     setActiveCycleId(null);
   }
-
-  useEffect(() => {
-    console.log("Cycles (Home):", cycles);
-  }, [cycles]);
 
   return (
     <div className="flex-1 flex-wrap">
