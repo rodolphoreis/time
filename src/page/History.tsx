@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { Cycle, CyclesContext } from "./Home";
+
+import { Cycle, CyclesContext } from "@/context/CycleContextProvider";
 
 export function History() {
   const { cycles } = useContext(CyclesContext);
