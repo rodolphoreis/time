@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Cycle, CyclesContext } from "@/context/CycleContextProvider";
+import ptBR from "date-fns/locale/pt-BR";
 
 export function History() {
   const { cycles } = useContext(CyclesContext);
