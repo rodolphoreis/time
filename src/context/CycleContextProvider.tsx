@@ -14,6 +14,7 @@ export interface CycleContextType {
 }
 
 export const CyclesContext = createContext({} as CycleContextType);
+const savedCycles = JSON.parse(localStorage.getItem("cycles") || "[]");
 
 export function CycleContextProvider({ children }: { children: ReactNode }) {
   const [cycles, setCycles] = useState<Cycle[]>([
