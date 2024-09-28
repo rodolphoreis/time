@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Cycle, CyclesContext } from "@/context/CycleContextProvider";
-import ptBR from "date-fns/locale/pt-BR";
+import { ptBR } from "date-fns/locale/pt-BR";
 import { formatDistanceToNow } from "date-fns";
 
 export function History() {
