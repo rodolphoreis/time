@@ -1,4 +1,4 @@
-import { ReactNode, useState, createContext } from "react";
+import { ReactNode, useState, createContext, useEffect } from "react";
 
 export interface Cycle {
   id: string;
@@ -14,17 +14,16 @@ export interface CycleContextType {
 }
 
 export const CyclesContext = createContext({} as CycleContextType);
+
 const savedCycles = JSON.parse(localStorage.getItem("cycles") || "[]");
 
 export function CycleContextProvider({ children }: { children: ReactNode }) {
-  const [cycles, setCycles] = useState<Cycle[]>([
-    {
-      id: "1",
-      task: "Estudar TypeScript",
-      duration: 30,
-      startDate: new Date(),
-    },
-  ]);
+  const [cycles, setCycles] = useState<Cycle[]>(savedCycles);
+
+  useEffect(() => {
+    localStorage.setItem("cycles", JSON.stringify(cycles));
+  }, [cycles]);
+
   return (
     <CyclesContext.Provider value={{ cycles, setCycles }}>
       {children}
