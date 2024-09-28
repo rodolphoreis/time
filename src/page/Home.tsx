@@ -10,7 +10,7 @@ import { Cycle, CyclesContext } from "@/context/CycleContextProvider";
 
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, "Informe a tarefa!").max(100),
-  duration: zod.number().min(1).max(60),
+  duration: zod.number().min(5).max(60),
 });
 
 type InputsTypes = zod.infer<typeof newCycleFormValidationSchema>;
@@ -129,7 +129,7 @@ export function Home() {
             type="number"
             {...register("duration", { required: true, valueAsNumber: true })}
             step={5}
-            min={1}
+            min={5}
             max={60}
             placeholder="00"
             className="bg-transparent outline-2 border-b border-gray-500 outline-none w-32"
