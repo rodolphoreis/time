@@ -23,7 +23,12 @@ export function History() {
               <tr key={cycle.id}>
                 <td className="w-1/2">{cycle.task}</td>
                 <td>{cycle.duration} min</td>
-                <td>{new Date(cycle.startDate).toLocaleDateString("pt-BR")}</td>
+                <td>
+                  {formatDistanceToNow(cycle.startDate, {
+                    addSuffix: true,
+                    locale: ptBR,
+                  })}
+                </td>
                 <td className="flex items-center gap-2">
                   {cycle.interruptedDate ? (
                     <div className="rounded-full bg-red-600 w-2 h-2"></div>
