@@ -4,14 +4,9 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
-import {
-  useEffect,
-  useState,
-  createContext,
-  ReactNode,
-  useContext,
-} from "react";
+import { useEffect, useState, useContext } from "react";
 import { differenceInSeconds } from "date-fns";
+import { Cycle, CyclesContext } from "@/context/CycleContextProvider";
 
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, "Informe a tarefa!").max(100),
@@ -19,21 +14,6 @@ const newCycleFormValidationSchema = zod.object({
 });
 
 type InputsTypes = zod.infer<typeof newCycleFormValidationSchema>;
-
-export interface Cycle {
-  id: string;
-  task: string;
-  duration: number;
-  startDate: Date;
-  interruptedDate?: Date;
-}
-
-interface CycleContextType {
-  cycles: Cycle[];
-  setCycles: React.Dispatch<React.SetStateAction<Cycle[]>>;
-}
-
-export const CyclesContext = createContext({} as CycleContextType);
 
 export function Home() {
   const { cycles, setCycles } = useContext(CyclesContext);
@@ -93,7 +73,7 @@ export function Home() {
       duration: data.duration,
       startDate: new Date(),
     };
-    setCycles((state) => [...state, newCicle]);
+    setCycles([...cycles, newCicle]);
     setActiveCycleId(id);
     setAmountSecondsPassed(0);
     reset();
@@ -198,21 +178,5 @@ export function Home() {
         )}
       </form>
     </div>
-  );
-}
-
-export function CycleContextProvider({ children }: { children: ReactNode }) {
-  const [cycles, setCycles] = useState<Cycle[]>([
-    {
-      id: "1",
-      task: "Estudar TypeScript",
-      duration: 30,
-      startDate: new Date(),
-    },
-  ]);
-  return (
-    <CyclesContext.Provider value={{ cycles, setCycles }}>
-      {children}
-    </CyclesContext.Provider>
   );
 }
