@@ -1,5 +1,6 @@
 import { Header } from "./components/Header";
-import { CycleContextProvider } from "./page/Home";
+import { CycleContextProvider } from "./context/CycleContextProvider";
+
 import { Router } from "./Router";
 
 export function App() {
