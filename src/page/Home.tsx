@@ -17,7 +17,7 @@ type InputsTypes = zod.infer<typeof newCycleFormValidationSchema>;
 
 export function Home() {
   const { cycles, setCycles } = useContext(CyclesContext);
-  console.log(cycles);
+  console.log("Cycles: ", cycles);
 
   const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
@@ -64,16 +64,16 @@ export function Home() {
     }
   }, [activeCycle, amountSecondsPassed, activeCycleId, totalSeconds]);
 
-  const handleCreateNewCicle = (data: InputsTypes) => {
+  const handleCreateNewCycle = (data: InputsTypes) => {
     const id = String(new Date().getTime());
 
-    const newCicle: Cycle = {
+    const newCycle: Cycle = {
       id,
       task: data.task,
       duration: data.duration,
       startDate: new Date(),
     };
-    setCycles([...cycles, newCicle]);
+    setCycles((prevCycles) => [...prevCycles, newCycle]);
     setActiveCycleId(id);
     setAmountSecondsPassed(0);
     reset();
@@ -105,11 +105,15 @@ export function Home() {
     setActiveCycleId(null);
   }
 
+  useEffect(() => {
+    console.log("Cycles (Home):", cycles);
+  }, [cycles]);
+
   return (
     <div className="flex-1 flex-wrap">
       <form
         className=" m-1 flex flex-wrap flex-col "
-        onSubmit={handleSubmit(handleCreateNewCicle)}
+        onSubmit={handleSubmit(handleCreateNewCycle)}
       >
         <div className="flex gap-2 ">
           <Input
