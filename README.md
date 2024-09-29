@@ -1,50 +1,50 @@
-# React + TypeScript + Vite
+# Time
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Instalação
 
-Currently, two official plugins are available:
+Para começar a usar este projeto, siga estas etapas:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/rodolphoreis/time.git
+   cd time
 
-## Expanding the ESLint configuration
+2. **Inicie o servidor de desenvolvimento:**
+   ```bash
+   npm install
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+4. **Abra o navegador e navegue até** [http://localhost:3000](http://localhost:3000).
 
-- Configure the top-level `parserOptions` property like this:
+## Funcionalidades
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Gerenciamento de Tarefas:** Crie e gerencie tarefas com duração especificada.
+- **Registro de Tempo:** Registre o horário de início e término das tarefas.
+- **Indicadores de Status:** Sinalização visual para a conclusão das tarefas (concluídas ou interrompidas).
+- **Histórico de Tarefas:** Revise tarefas passadas e suas durações.
+- **Design Responsivo:** Otimizado para uso em desktop e mobile.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Imagens do Projeto
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+![Tela Inicial](src/img/time-home.png)  
+*Home*
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+![Tela de Histórico](src/img/time-history.png)  
+*Histórico*
+
+
+## Ferramentas Utilizadas
+
+Este projeto foi desenvolvido utilizando as seguintes ferramentas e bibliotecas:
+
+-  React: Uma biblioteca JavaScript para construir interfaces de usuário.
+-  TypeScript: Uma linguagem que adiciona tipagem estática ao JavaScript, melhorando a manutenção e a escalabilidade do código.
+-  Vite: Uma ferramenta de build rápida para aplicações front-end.
+-  Tailwind CSS: Um framework CSS que permite a construção de interfaces responsivas de forma rápida e eficiente.
+-  Date-fns: Uma biblioteca para manipulação e formatação de datas.
+
+
+## Contribuição
+
+Contribuições são bem-vindas! Se você gostaria de contribuir para este projeto, por favor, faça um fork do repositório e envie um pull request com suas alterações.
+
+
