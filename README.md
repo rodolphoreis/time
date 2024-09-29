@@ -2,7 +2,7 @@
 
 ## Deploy
 
-Este projeto está disponível online. Acesse a versão deployada [aqui](https://seu-deploy-na-vercel.com).
+Este projeto está disponível online. Acesse a versão deployada [aqui](https://time-sooty-alpha.vercel.app/).
 
 ## Instalação
 
